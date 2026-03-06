@@ -1,6 +1,12 @@
 {
-  "name": "UCLH",
-  "short_name": "uclh",
-  "tps": ["Eclipse"],
-  "location": "London, UK"
+  "name": "Photon Plan Checker",
+  "description": "Plan Checking Script for Photon RT plans",
+  "tps": "Eclipse",
+  "language": "C#",
+  "esapi_version": "16.1",
+  "status": "in_use",
+  "tags": ["automation", "plan-evaluation"],
+  "last_updated": "2026-01-15",
+  "contact_name": "Ruairidh Howes",
+  "contact_email": "ruairidh.howes1@nhs.net"
 }
