@@ -319,7 +319,7 @@ def build_html(centres):
 <body>
     <div class="header">
         <h1>RT Scripting Hub</h1>
-        <p>A community registry of ESAPI and TPS scripts across UK radiotherapy centres. Browse, filter, and reach out to collaborate.</p>
+        <p>A community registry of ESAPI scripts across radiotherapy centres. Browse, filter, and reach out to collaborate.</p>
     </div>
 
     <div class="stats-bar">
