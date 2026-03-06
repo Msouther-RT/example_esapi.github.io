@@ -1,0 +1,12 @@
+{
+  "name": "Example Script",
+  "description": "This script does something",
+  "tps": "Eclipse",
+  "language": "C#",
+  "esapi_version": "16.1",
+  "status": "in_development",
+  "tags": ["treatment"],
+  "last_updated": "2026-01-15",
+  "contact_name": "Jane Doe",
+  "contact_email": "Jane@exmaple.com"
+}

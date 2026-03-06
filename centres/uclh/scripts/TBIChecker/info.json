@@ -1,0 +1,12 @@
+{
+  "name": "Photon TBI Plan Checker",
+  "description": "Plan Checking Script for Photon TBI plans",
+  "tps": "Eclipse",
+  "language": "C#",
+  "esapi_version": "16.1",
+  "status": "in_use",
+  "tags": ["automation", "plan-evaluation"],
+  "last_updated": "2026-01-15",
+  "contact_name": "Matthew Southerby",
+  "contact_email": "matthew.southerby@nhs.net"
+}
