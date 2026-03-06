@@ -112,7 +112,7 @@ def build_html(centres):
         tps_display = tps_to_str(s.get("tps", "Unknown"))
         readme_link = ""
         if s.get("has_readme"):
-            readme_path = f"https://github.com/YOUR-ORG/esapi-script-hub/tree/main/centres/{s['centre_folder']}/scripts/{s['folder']}"
+            readme_path = f"https://github.com/Msouther-RT/example_esapi.github.io/tree/main/centres/{s['centre_folder']}/scripts/{s['folder']}"
             readme_link = f'<a href="{readme_path}" target="_blank">View details</a>'
 
         rows_html += f"""
@@ -380,8 +380,8 @@ def build_html(centres):
     </div>
 
     <div class="footer">
-        <p>Want to add your centre? See the <a href="https://github.com/YOUR-ORG/esapi-script-hub/blob/main/CONTRIBUTING.md">Contributing Guide</a>.
-        Built automatically from script metadata. Source on <a href="https://github.com/YOUR-ORG/esapi-script-hub">GitHub</a>.</p>
+        <p>Want to add your centre? See the <a href="https://github.com/Msouther-RT/example_esapi.github.io/blob/main/CONTRIBUTING.md">Contributing Guide</a>.
+        Built automatically from script metadata. Source on <a href="https://github.com/Msouther-RT/example_esapi.github.io">GitHub</a>.</p>
     </div>
 
     <script>
