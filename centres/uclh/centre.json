@@ -1,0 +1,8 @@
+{
+  "name": "UCLH",
+  "short_name": "uclh",
+  "contact_name": "Matthew Southerby",
+  "contact_email": "matthew.southerby@nhs.uk",
+  "tps": ["Eclipse"],
+  "location": "London, UK"
+}

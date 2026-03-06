@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RT Scripting Hub — ESAPI &amp; TPS Script Registry</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            background: #f6f8fa;
+            color: #1f2328;
+            line-height: 1.5;
+        }
+
+        .header {
+            background: #0d1117;
+            color: #e6edf3;
+            padding: 2rem 1.5rem;
+            border-bottom: 3px solid #1a7f37;
+        }
+
+        .header h1 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .header p {
+            color: #8b949e;
+            font-size: 0.95rem;
+        }
+
+        .stats-bar {
+            display: flex;
+            gap: 2rem;
+            padding: 1rem 1.5rem;
+            background: #fff;
+            border-bottom: 1px solid #d1d9e0;
+            font-size: 0.85rem;
+            color: #656d76;
+        }
+
+        .stats-bar strong {
+            color: #1f2328;
+        }
+
+        .controls {
+            padding: 1rem 1.5rem;
+            background: #fff;
+            border-bottom: 1px solid #d1d9e0;
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .controls label {
+            font-size: 0.8rem;
+            color: #656d76;
+            font-weight: 500;
+        }
+
+        .controls select, .controls input {
+            padding: 0.35rem 0.5rem;
+            border: 1px solid #d1d9e0;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            background: #f6f8fa;
+        }
+
+        .controls input {
+            width: 220px;
+        }
+
+        .content {
+            padding: 1rem 1.5rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            border: 1px solid #d1d9e0;
+            border-radius: 6px;
+            overflow: hidden;
+            font-size: 0.85rem;
+        }
+
+        th {
+            background: #f6f8fa;
+            padding: 0.6rem 0.75rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.8rem;
+            color: #656d76;
+            border-bottom: 1px solid #d1d9e0;
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 0.6rem 0.75rem;
+            border-bottom: 1px solid #d1d9e0;
+            vertical-align: top;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover {
+            background: #f6f8fa;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.15rem 0.5rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .status-live {
+            background: #dafbe1;
+            color: #116329;
+        }
+
+        .status-dev {
+            background: #ddf4ff;
+            color: #0550ae;
+        }
+
+        .status-concept {
+            background: #fff8c5;
+            color: #6a5300;
+        }
+
+        .status-archived {
+            background: #f0f0f0;
+            color: #666;
+        }
+
+        a {
+            color: #0969da;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .footer {
+            padding: 1.5rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #8b949e;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 2rem;
+            color: #8b949e;
+            display: none;
+        }
+
+        @media (max-width: 900px) {
+            .controls { flex-direction: column; gap: 0.5rem; }
+            table { font-size: 0.78rem; }
+            td, th { padding: 0.4rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>RT Scripting Hub</h1>
+        <p>A community registry of ESAPI and TPS scripts across UK radiotherapy centres. Browse, filter, and reach out to collaborate.</p>
+    </div>
+
+    <div class="stats-bar">
+        <span><strong>3</strong> centres</span>
+        <span><strong>5</strong> scripts registered</span>
+        <span><strong>4</strong> in clinical use</span>
+        <span><strong>1</strong> in development</span>
+        <span>Last built: 2026-03-06 12:48</span>
+    </div>
+
+    <div class="controls">
+        <div>
+            <label for="search">Search:</label>
+            <input type="text" id="search" placeholder="e.g. DVH, naming, complexity...">
+        </div>
+        <div>
+            <label for="filter-tps">TPS:</label>
+            <select id="filter-tps">
+                <option value="">All</option>
+                <option value="Eclipse">Eclipse</option><option value="RayStation">RayStation</option>
+            </select>
+        </div>
+        <div>
+            <label for="filter-status">Status:</label>
+            <select id="filter-status">
+                <option value="">All</option>
+                <option value="in_development">In Development</option><option value="in_use">In Use</option>
+            </select>
+        </div>
+        <div>
+            <label for="filter-lang">Language:</label>
+            <select id="filter-lang">
+                <option value="">All</option>
+                <option value="C#">C#</option><option value="Python">Python</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="content">
+        <table id="scripts-table">
+            <thead>
+                <tr>
+                    <th>Script</th>
+                    <th>Centre</th>
+                    <th>TPS</th>
+                    <th>Language</th>
+                    <th>Status</th>
+                    <th>Tags</th>
+                    <th>Details</th>
+                    <th>Contact</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+        <tr data-tps="RayStation" data-status="in_use" data-lang="Python">
+            <td><strong>Plan Complexity Metrics Calculator</strong><br><small>Calculates multiple plan complexity metrics (MCS, edge metric, aperture irregularity) for VMAT plans to support plan quality review.</small></td>
+            <td>Cambridge Addenbrooke's<br><small>Cambridge, UK</small></td>
+            <td>RayStation</td>
+            <td>Python</td>
+            <td><span class="status-badge status-live">In Use</span></td>
+            <td><small>plan-complexity, VMAT, MCS, quality-assurance, modulation</small></td>
+            <td><a href="https://github.com/YOUR-ORG/esapi-script-hub/tree/main/centres/cambridge-addenbrookes/scripts/plan-complexity-metric" target="_blank">View details</a></td>
+            <td><a href="mailto:sarah.chen@addenbrookes.nhs.uk">Dr Sarah Chen</a></td>
+        </tr>
+        <tr data-tps="Eclipse" data-status="in_development" data-lang="C#">
+            <td><strong>Dose Summation Helper</strong><br><small>Facilitates dose summation across multiple courses with deformable registration, with sanity checks on the output.</small></td>
+            <td>Leeds SJUH<br><small>Leeds, UK</small></td>
+            <td>Eclipse</td>
+            <td>C#</td>
+            <td><span class="status-badge status-dev">In Development</span></td>
+            <td><small>dose-summation, deformable-registration, re-treatment, composite-dose</small></td>
+            <td><a href="https://github.com/YOUR-ORG/esapi-script-hub/tree/main/centres/leeds-sjuh/scripts/dose-summation-tool" target="_blank">View details</a></td>
+            <td><a href="mailto:tom.brown@nhs.net">Dr Tom Brown</a></td>
+        </tr>
+        <tr data-tps="Eclipse" data-status="in_use" data-lang="C#">
+            <td><strong>Structure Naming Convention Checker</strong><br><small>Validates all structure names in a plan against TG-263 naming conventions and flags non-compliant structures.</small></td>
+            <td>Leeds SJUH<br><small>Leeds, UK</small></td>
+            <td>Eclipse</td>
+            <td>C#</td>
+            <td><span class="status-badge status-live">In Use</span></td>
+            <td><small>structure-naming, TG-263, compliance, quality-assurance</small></td>
+            <td><a href="https://github.com/YOUR-ORG/esapi-script-hub/tree/main/centres/leeds-sjuh/scripts/structure-naming-checker" target="_blank">View details</a></td>
+            <td><a href="mailto:tom.brown@nhs.net">Dr Tom Brown</a></td>
+        </tr>
+        <tr data-tps="Eclipse" data-status="in_use" data-lang="C#">
+            <td><strong>Automated Plan Evaluation</strong><br><small>Checks plan against clinical protocol constraints automatically. Generates a pass/fail report for each DVH objective.</small></td>
+            <td>Manchester Christie<br><small>Manchester, UK</small></td>
+            <td>Eclipse</td>
+            <td>C#</td>
+            <td><span class="status-badge status-live">In Use</span></td>
+            <td><small>plan-evaluation, dvh, automation, clinical-protocols</small></td>
+            <td><a href="https://github.com/YOUR-ORG/esapi-script-hub/tree/main/centres/manchester-christie/scripts/auto-plan-eval" target="_blank">View details</a></td>
+            <td><a href="mailto:jane.smith@christie.nhs.uk">Dr Jane Smith</a></td>
+        </tr>
+        <tr data-tps="Eclipse" data-status="in_use" data-lang="C#">
+            <td><strong>DVH to CSV Exporter</strong><br><small>Batch exports DVH data from multiple plans to CSV files for external analysis in Python/R/Excel.</small></td>
+            <td>Manchester Christie<br><small>Manchester, UK</small></td>
+            <td>Eclipse</td>
+            <td>C#</td>
+            <td><span class="status-badge status-live">In Use</span></td>
+            <td><small>dvh, export, csv, data-analysis, batch</small></td>
+            <td><a href="https://github.com/YOUR-ORG/esapi-script-hub/tree/main/centres/manchester-christie/scripts/dvh-csv-export" target="_blank">View details</a></td>
+            <td><a href="mailto:jane.smith@christie.nhs.uk">Dr Jane Smith</a></td>
+        </tr>
+            </tbody>
+        </table>
+        <div class="no-results" id="no-results">No scripts match your filters.</div>
+    </div>
+
+    <div class="footer">
+        <p>Want to add your centre? See the <a href="https://github.com/YOUR-ORG/esapi-script-hub/blob/main/CONTRIBUTING.md">Contributing Guide</a>.
+        Built automatically from script metadata. Source on <a href="https://github.com/YOUR-ORG/esapi-script-hub">GitHub</a>.</p>
+    </div>
+
+    <script>
+        const searchInput = document.getElementById('search');
+        const filterTps = document.getElementById('filter-tps');
+        const filterStatus = document.getElementById('filter-status');
+        const filterLang = document.getElementById('filter-lang');
+        const tbody = document.querySelector('#scripts-table tbody');
+        const noResults = document.getElementById('no-results');
+
+        function applyFilters() {
+            const query = searchInput.value.toLowerCase();
+            const tps = filterTps.value;
+            const status = filterStatus.value;
+            const lang = filterLang.value;
+            let visible = 0;
+
+            tbody.querySelectorAll('tr').forEach(row => {
+                const text = row.textContent.toLowerCase();
+                const matchSearch = !query || text.includes(query);
+                const matchTps = !tps || row.dataset.tps === tps;
+                const matchStatus = !status || row.dataset.status === status;
+                const matchLang = !lang || row.dataset.lang === lang;
+
+                const show = matchSearch && matchTps && matchStatus && matchLang;
+                row.style.display = show ? '' : 'none';
+                if (show) visible++;
+            });
+
+            noResults.style.display = visible === 0 ? 'block' : 'none';
+        }
+
+        searchInput.addEventListener('input', applyFilters);
+        filterTps.addEventListener('change', applyFilters);
+        filterStatus.addEventListener('change', applyFilters);
+        filterLang.addEventListener('change', applyFilters);
+    </script>
+</body>
+</html>
