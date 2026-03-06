@@ -179,11 +179,11 @@
     </div>
 
     <div class="stats-bar">
-        <span><strong>1</strong> centres</span>
-        <span><strong>1</strong> scripts registered</span>
-        <span><strong>1</strong> in clinical use</span>
-        <span><strong>0</strong> in development</span>
-        <span>Last built: 2026-03-06 14:42</span>
+        <span><strong>2</strong> centres</span>
+        <span><strong>5</strong> scripts registered</span>
+        <span><strong>2</strong> in clinical use</span>
+        <span><strong>1</strong> in development</span>
+        <span>Last built: 2026-03-06 14:57</span>
     </div>
 
     <div class="controls">
@@ -202,7 +202,7 @@
             <label for="filter-status">Status:</label>
             <select id="filter-status">
                 <option value="">All</option>
-                <option value="in_use">In Use</option>
+                <option value="archived">Archived</option><option value="concept">Concept</option><option value="in_development">In Development</option><option value="in_use">In Use</option>
             </select>
         </div>
         <div>
@@ -230,6 +230,36 @@
             </thead>
             <tbody>
                 
+        <tr data-tps="Eclipse" data-status="in_development" data-lang="C#">
+            <td><strong>Example Script</strong><br><small>This script does something</small></td>
+            <td>exmaple<br><small>Somehwere, Country</small></td>
+            <td>Eclipse</td>
+            <td>C#</td>
+            <td><span class="status-badge status-dev">In Development</span></td>
+            <td><small>treatment</small></td>
+            <td><a href="https://github.com/Msouther-RT/example_esapi.github.io/tree/main/centres/example/scripts/Example_script" target="_blank">View details</a></td>
+            <td><a href="mailto:Jane@exmaple.com">Jane Doe</a></td>
+        </tr>
+        <tr data-tps="Eclipse" data-status="concept" data-lang="C#">
+            <td><strong>Example Script_2</strong><br><small>This script does something</small></td>
+            <td>exmaple<br><small>Somehwere, Country</small></td>
+            <td>Eclipse</td>
+            <td>C#</td>
+            <td><span class="status-badge status-concept">Concept</span></td>
+            <td><small>QA</small></td>
+            <td><a href="https://github.com/Msouther-RT/example_esapi.github.io/tree/main/centres/example/scripts/Example_script_2" target="_blank">View details</a></td>
+            <td><a href="mailto:Jane@exmaple.com">Jane Doe</a></td>
+        </tr>
+        <tr data-tps="Eclipse" data-status="archived" data-lang="C#">
+            <td><strong>Example Script_3</strong><br><small>This script does something</small></td>
+            <td>exmaple<br><small>Somehwere, Country</small></td>
+            <td>Eclipse</td>
+            <td>C#</td>
+            <td><span class="status-badge status-archived">Archived</span></td>
+            <td><small>QA</small></td>
+            <td><a href="https://github.com/Msouther-RT/example_esapi.github.io/tree/main/centres/example/scripts/Example_script_3" target="_blank">View details</a></td>
+            <td><a href="mailto:John@exmaple.com">John Doe</a></td>
+        </tr>
         <tr data-tps="Eclipse" data-status="in_use" data-lang="C#">
             <td><strong>Photon Plan Checker</strong><br><small>Plan Checking Script for Photon RT plans</small></td>
             <td>uclh<br><small>London, UK</small></td>
@@ -239,6 +269,16 @@
             <td><small>automation, plan-evaluation</small></td>
             <td><a href="https://github.com/Msouther-RT/example_esapi.github.io/tree/main/centres/uclh/scripts/PlanChecker" target="_blank">View details</a></td>
             <td><a href="mailto:ruairidh.howes1@nhs.net">Ruairidh Howes</a></td>
+        </tr>
+        <tr data-tps="Eclipse" data-status="in_use" data-lang="C#">
+            <td><strong>Photon TBI Plan Checker</strong><br><small>Plan Checking Script for Photon TBI plans</small></td>
+            <td>uclh<br><small>London, UK</small></td>
+            <td>Eclipse</td>
+            <td>C#</td>
+            <td><span class="status-badge status-live">In Use</span></td>
+            <td><small>automation, plan-evaluation</small></td>
+            <td><a href="https://github.com/Msouther-RT/example_esapi.github.io/tree/main/centres/uclh/scripts/TBIChecker" target="_blank">View details</a></td>
+            <td><a href="mailto:matthew.southerby@nhs.net">Matthew Southerby</a></td>
         </tr>
             </tbody>
         </table>
