@@ -1,0 +1,1 @@
+Read Me for the Photon Plan Checking Script
